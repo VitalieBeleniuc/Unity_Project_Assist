@@ -1,0 +1,15 @@
+{
+  "NumberOfLevel": 1,
+  "Duration": 300,
+  "Slots": [
+    {
+      "PositionX": 10,
+      "PositionY": 20
+    },
+    {
+      "PositionX": 30,
+      "PositionY": 40
+    }
+  ],
+  "LevelType": "Normal"
+}
