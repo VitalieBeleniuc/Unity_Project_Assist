@@ -3,12 +3,49 @@
   "Duration": 300,
   "Slots": [
     {
-      "PositionX": 10,
-      "PositionY": 20
+      "PositionX": -34.5,
+      "PositionY": 105,
+      "ItemHeld": "None"
     },
     {
-      "PositionX": 30,
-      "PositionY": 40
+      "PositionX": 0.5,
+      "PositionY": 105,
+      "ItemHeld": "GreenPotion"
+    },
+    {
+      "PositionX": 35.5,
+      "PositionY": 105,
+      "ItemHeld": "RedPotion"
+    },
+    {
+      "PositionX": -87.5,
+      "PositionY": 55,
+      "ItemHeld": "RedPotion"
+    },
+    {
+      "PositionX": -52.5,
+      "PositionY": 55,
+      "ItemHeld": "RedPotion"
+    },
+    {
+      "PositionX": -17.5,
+      "PositionY": 55,
+      "ItemHeld": "None"
+    },
+    {
+      "PositionX": 17.5,
+      "PositionY": 55,
+      "ItemHeld": "None"
+    },
+    {
+      "PositionX": 52.5,
+      "PositionY": 55,
+      "ItemHeld": "GreenPotion"
+    },
+    {
+      "PositionX": 87.5,
+      "PositionY": 55,
+      "ItemHeld": "GreenPotion"
     }
   ],
   "LevelType": "Normal"

@@ -10,13 +10,14 @@ public class Level
     public int NumberOfLevel;
     public int Duration;
     public List<Slot> Slots;
-    public LevelType LevelType;
+    public LevelType LevelType; // dificultatea
 
     [System.Serializable]
     public class Slot
     {
-        public int PositionX; // test
-        public int PositionY; // test
+        public float PositionX;
+        public float PositionY;
+        public ItemType ItemHeld; // item-ul pe care o sa-l contina slot-ul
 
     }
 }
@@ -26,4 +27,13 @@ public enum LevelType
     Normal,
     Hard,
     SuperHard
+}
+
+public enum ItemType
+{
+    None, 
+    RedPotion,
+    GreenPotion,
+    BluePotion, 
+    PurplePotion
 }

@@ -208,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 4, y: 7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 773819725}
   - component: {fileID: 773819724}
   m_Layer: 0
-  m_Name: LevelController
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,6 +243,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc17e79355473604887607372ffd3d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPrefab: {fileID: 5620537378212762527, guid: 2a4dbf7f90ba745439712d5dd8de3585, type: 3}
+  slotsParent: {fileID: 849510354}
+  redPotionPrefab: {fileID: 4151741031309576649, guid: 801afef0be2aa324aaedb72d108984e2, type: 3}
+  bluePotionPrefab: {fileID: 1969849380660749751, guid: e61fb667e73cee74f8b2eadd19f8e663, type: 3}
+  greenPotionPrefab: {fileID: 6834497668027171388, guid: a5c0ebf3d5c1d34479280ed59707606e, type: 3}
+  purplePotionPrefab: {fileID: 3770575007490042064, guid: d813c2dfd2499ae43992d48ef85bd9fe, type: 3}
 --- !u!4 &773819725
 Transform:
   m_ObjectHideFlags: 0
@@ -501,10 +507,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 849510354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.1838913, y: 207.6}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.49995, y: -17.2871}
+  m_SizeDelta: {x: 240.57, y: 36.8621}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654318400
 MonoBehaviour:
