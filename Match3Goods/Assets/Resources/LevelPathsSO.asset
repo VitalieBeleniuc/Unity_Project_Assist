@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelJsonPaths:
   - Assets/Resources/JSON_Levels/level1.json
+  - Assets/Resources/JSON_Levels/level2.json

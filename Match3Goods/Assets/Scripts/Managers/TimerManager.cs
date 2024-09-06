@@ -7,19 +7,7 @@ public class TimerManager : MonoBehaviour
 {
     public static TimerManager Instance;
     public Text timerText;
-
-    void Awake() // singleton pattern failsafe
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    private float _levelTimer;
 
     public void UpdateTimerDisplay(float timeRemaining)
     {
@@ -27,4 +15,24 @@ public class TimerManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(timeRemaining % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    public void StartLevelTimer(float duration)
+    {
+        _levelTimer = duration;
+        StartCoroutine(LevelTimer());
+    }
+
+    private IEnumerator LevelTimer()
+    {
+        while (_levelTimer > 0)
+        {
+            _levelTimer -= Time.deltaTime;
+            UpdateTimerDisplay(_levelTimer);
+            yield return null;
+        }
+
+        Debug.Log("Game Over");
+        // TODO: popup pentru restartarea nivelului.
+    }
+
 }

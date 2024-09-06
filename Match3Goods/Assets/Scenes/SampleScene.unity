@@ -243,12 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc17e79355473604887607372ffd3d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPrefab: {fileID: 5620537378212762527, guid: 2a4dbf7f90ba745439712d5dd8de3585, type: 3}
-  slotsParent: {fileID: 849510354}
-  redPotionPrefab: {fileID: 4151741031309576649, guid: 801afef0be2aa324aaedb72d108984e2, type: 3}
-  bluePotionPrefab: {fileID: 1969849380660749751, guid: e61fb667e73cee74f8b2eadd19f8e663, type: 3}
-  greenPotionPrefab: {fileID: 6834497668027171388, guid: a5c0ebf3d5c1d34479280ed59707606e, type: 3}
-  purplePotionPrefab: {fileID: 3770575007490042064, guid: d813c2dfd2499ae43992d48ef85bd9fe, type: 3}
 --- !u!4 &773819725
 Transform:
   m_ObjectHideFlags: 0
@@ -475,6 +469,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1504401412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1504401414}
+  - component: {fileID: 1504401413}
+  m_Layer: 0
+  m_Name: SlotManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1504401413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504401412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79ce8622c6575f40851faa44db3852a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shelfPrefab: {fileID: 6492458048808292380, guid: 4965fd05e643f784bbeb728d16e0f668, type: 3}
+  slotPrefab: {fileID: 5620537378212762527, guid: 2a4dbf7f90ba745439712d5dd8de3585, type: 3}
+  shelvesParent: {fileID: 849510354}
+  slotsParent: {fileID: 849510354}
+  redPotionPrefab: {fileID: 4151741031309576649, guid: 801afef0be2aa324aaedb72d108984e2, type: 3}
+  bluePotionPrefab: {fileID: 1969849380660749751, guid: e61fb667e73cee74f8b2eadd19f8e663, type: 3}
+  greenPotionPrefab: {fileID: 6834497668027171388, guid: a5c0ebf3d5c1d34479280ed59707606e, type: 3}
+  purplePotionPrefab: {fileID: 3770575007490042064, guid: d813c2dfd2499ae43992d48ef85bd9fe, type: 3}
+--- !u!4 &1504401414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504401412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 124.5, y: 221.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654318398
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +698,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPathsSO: {fileID: 11400000, guid: 67889dd6efe76de4c84d4821e44b1a7e, type: 2}
+  interactableSlotPrefab: {fileID: 5620537378212762527, guid: 2a4dbf7f90ba745439712d5dd8de3585, type: 3}
+  levelManager: {fileID: 773819724}
+  timerManager: {fileID: 1258941240}
+  slotManager: {fileID: 1504401413}
 --- !u!4 &2034060516
 Transform:
   m_ObjectHideFlags: 0
@@ -678,3 +728,4 @@ SceneRoots:
   - {fileID: 1065903614}
   - {fileID: 2034060516}
   - {fileID: 1258941241}
+  - {fileID: 1504401414}

@@ -9,16 +9,25 @@ public class Level
 {
     public int NumberOfLevel;
     public int Duration;
-    public List<Slot> Slots;
+    public List<Shelf> Shelves;
     public LevelType LevelType; // dificultatea
 
     [System.Serializable]
-    public class Slot
+    public class Shelf // adaugat pentru fidelitate dupa logica jocului original
     {
-        public float PositionX;
-        public float PositionY;
-        public ItemType ItemHeld; // item-ul pe care o sa-l contina slot-ul
+        public float ShelfPositionX;
+        public float ShelfPositionY;
+        public List<Slot> Slots;
 
+        [System.Serializable]
+        public class Slot
+        {
+            public float SlotPositionX;
+            public float SlotPositionY;
+            public ItemType ItemHeld;
+            public ItemType ItemHeldLayer2;
+            public ItemType ItemHeldLayer3;
+        }
     }
 }
 
