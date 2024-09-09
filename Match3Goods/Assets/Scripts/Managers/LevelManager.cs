@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 
     [Inject] private SlotManager _slotManager;
     [Inject] private TimerManager _timerManager;
+    [Inject] private GameStateManager stateManager;
 
     // Zenject
     [Inject]
@@ -22,11 +23,7 @@ public class LevelManager : MonoBehaviour
     {
         _levelPaths = levelPaths;
     }
-    void Start()
-    {
-        SetCurrentLevelIndex(0);
-        LoadCurrentLevel(); 
-    }
+
     public void LoadCurrentLevel() // Incarca nivelul
     {
         string jsonPath = _levelPaths.levelJsonPaths[_currentLevelIndex];
@@ -34,19 +31,28 @@ public class LevelManager : MonoBehaviour
 
         // Covnertirea
         Level levelData = JsonConvert.DeserializeObject<Level>(jsonContent);
-
-        // TODO: transform into a popup
         Debug.Log($"Level: {levelData.NumberOfLevel}, Duration: {levelData.Duration}, Difficulty: {levelData.LevelType}");
 
         // Setare timer
-        _timerManager.StartLevelTimer(levelData.Duration);
+        _timerManager.StartLevelTimer(levelData.Duration+1);
 
         // Incarcare slot-uri conform pozitiilor din JSON
         _slotManager.LoadSlots(levelData.Shelves);
     }
     
-    // TODO: Next level loading
-
+    public void LoadNextLevel()
+    {
+        _timerManager.StopLevelTimerCouroutine();
+        if (_currentLevelIndex + 1 < _levelPaths.levelJsonPaths.Count)
+        {
+            _currentLevelIndex++;
+            LoadCurrentLevel();
+        }
+        else
+        {
+            stateManager.ChangeState(GameState.GameOver);
+        }
+    }
 
     public void SetCurrentLevelIndex(int index)
     {

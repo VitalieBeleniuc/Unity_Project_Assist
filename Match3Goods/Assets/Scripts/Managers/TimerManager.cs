@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Zenject;
 public class TimerManager : MonoBehaviour
 {
-    public static TimerManager Instance;
     public Text timerText;
     private float _levelTimer;
+    private Coroutine levelTimerCoroutine;
+    [Inject] private GameStateManager stateManager;
 
+
+    // actualizare ui timer
     public void UpdateTimerDisplay(float timeRemaining)
     {
         int minutes = Mathf.FloorToInt(timeRemaining / 60);
@@ -16,10 +19,22 @@ public class TimerManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    // evitarea -01:-01 TODO: de cautat o solutie mai eleganta
+    public void SetTimeZero()
+    {
+        timerText.text = "00:00";
+    }
+
     public void StartLevelTimer(float duration)
     {
         _levelTimer = duration;
-        StartCoroutine(LevelTimer());
+        levelTimerCoroutine = StartCoroutine(LevelTimer());
+    }
+
+    // stopare corutina timer
+    public void StopLevelTimerCouroutine()
+    {
+        StopCoroutine(levelTimerCoroutine);
     }
 
     private IEnumerator LevelTimer()
@@ -31,8 +46,11 @@ public class TimerManager : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Game Over");
-        // TODO: popup pentru restartarea nivelului.
+        stateManager.ChangeState(GameState.Loss);
     }
+
+
+
+
 
 }

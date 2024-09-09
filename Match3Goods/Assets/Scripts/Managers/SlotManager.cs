@@ -19,6 +19,8 @@ public class SlotManager : MonoBehaviour
     private List<GameObject> _loadedSlots = new List<GameObject>();
     private List<GameObject> itemsLayer2 = new List<GameObject>();
 
+    [Inject] private PopupManager popupManager;
+
     // Zenject factory
     [Inject] private InteractableSlotFactory _slotFactory;
     public void LoadSlots(List<Level.Shelf> shelvesData) // Incarca sloturile din JSON
@@ -179,23 +181,44 @@ public class SlotManager : MonoBehaviour
         Debug.Log("Match 3 Detected!");
     }
 
-    public void CheckIfAllItemsCleared()
+    public bool CheckIfAllItemsCleared()
     {
         foreach (var slotInstance in _loadedSlots)
         {
             if (slotInstance.GetComponentInChildren<DraggableItem>() != null)
             {
-                Debug.Log(slotInstance.GetComponentInChildren<DraggableItem>());
-                return;
+                return false;
             }
         }
 
-        Debug.Log("Congratulations! You cleared the level!");
+        _loadedSlots.Clear();
+        popupManager.ShowWinPopup();
+
+        return true;
     }
 
 
+    public void ClearShelves()
+    {
+        List<GameObject> shelvesToRemove = new List<GameObject>();
 
+        // itereaza prin fiecare copil si verifica daca era instantiat din shelf prefab
+        foreach (Transform shelf in shelvesParent)
+        {         
+            if (shelf.gameObject.name.Contains(shelfPrefab.name))
+            {
+                shelvesToRemove.Add(shelf.gameObject);
+            }
+        }
 
+        // distruge instantele
+        foreach (var shelf in shelvesToRemove)
+        {
+            Destroy(shelf);
+        }
+
+        _loadedSlots.Clear();
+    }
 
     // verifica daca sunt rafturi goale si activeaza urmatorul layer de iteme
     public void CheckShelvesAndActivateNextLayerItems()
@@ -210,7 +233,6 @@ public class SlotManager : MonoBehaviour
             {
                 if (slotTransform.GetComponentInChildren<DraggableItem>() != null)
                 {
-                    // Debug.Log("Not clear"); // TODO: pentru debug, remove
                     allSlotsEmpty = false;
                     break;
                 }
@@ -218,7 +240,6 @@ public class SlotManager : MonoBehaviour
 
             if (allSlotsEmpty)
             {
-                // Debug.Log("All clear"); // TODO: pentru debug, remove
                 ActivateNextLayerItemsForShelf(shelfTransform);
             }
         }

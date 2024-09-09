@@ -6,13 +6,9 @@ using Zenject;
 
 public class InteractableSlot : MonoBehaviour, IDropHandler
 {
-    private SlotManager _slotManager;
-
-    [Inject]
-    public void Construct(SlotManager slotManager)
-    {
-        _slotManager = slotManager;
-    }
+    [Inject] private SlotManager slotManager;
+    [Inject] private PopupManager popupManager;
+    [Inject] private GameStateManager stateManager;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -33,17 +29,21 @@ public class InteractableSlot : MonoBehaviour, IDropHandler
     private IEnumerator DelayedCheckForMatches()
     {
         yield return new WaitForSeconds(0.1f);
-            _slotManager.CheckForHorizontalMatches();
+            slotManager.CheckForHorizontalMatches();
     }
     private IEnumerator DelayedCheckForLayers()
     {
         yield return new WaitForSeconds(0.2f);
-            _slotManager.CheckShelvesAndActivateNextLayerItems();
+            slotManager.CheckShelvesAndActivateNextLayerItems();
     }
     private IEnumerator DelayedCheckForCompletion()
     {
         yield return new WaitForSeconds(0.3f);
-            _slotManager.CheckIfAllItemsCleared();
+        if (slotManager.CheckIfAllItemsCleared())
+        {
+            stateManager.ChangeState(GameState.Win);
+            stateManager.ChangeState(GameState.LevelTransition);
+        };
     }
 }
 
