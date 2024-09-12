@@ -1,0 +1,79 @@
+{
+  "NumberOfLevel": 2,
+  "Duration": 30,
+  "Shelves": [
+    {
+      "ShelfPositionX": 0.5,
+      "ShelfPositionY": 105,
+      "Slots": [
+        {
+          "SlotPositionX": -34.5,
+          "SlotPositionY": 105,
+          "ItemHeld": "None",
+	  "ItemHeldLayer2": "PurplePotion"
+        },
+        {
+          "SlotPositionX": 0.5,
+          "SlotPositionY": 105,
+          "ItemHeld": "GreenPotion",
+          "ItemHeldLayer2": "PurplePotion"
+        },
+        {
+          "SlotPositionX": 35.5,
+          "SlotPositionY": 105,
+          "ItemHeld": "RedPotion",
+          "ItemHeldLayer2": "None"
+        }
+      ]
+    },
+    {
+      "ShelfPositionX": -52.5,
+      "ShelfPositionY": 55,
+      "Slots": [
+        {
+          "SlotPositionX": -87.5,
+          "SlotPositionY": 55,
+          "ItemHeld": "RedPotion",
+          "ItemHeldLayer2": "PurplePotion"
+        },
+        {
+          "SlotPositionX": -52.5,
+          "SlotPositionY": 55,
+          "ItemHeld": "RedPotion",
+          "ItemHeldLayer2": "None"
+        },
+        {
+          "SlotPositionX": -17.5,
+          "SlotPositionY": 55,
+          "ItemHeld": "None",
+          "ItemHeldLayer2": "BluePotion"
+        }
+      ]
+    },
+    {
+      "ShelfPositionX": 52.5,
+      "ShelfPositionY": 55,
+      "Slots": [
+        {
+          "SlotPositionX": 17.5,
+          "SlotPositionY": 55,
+          "ItemHeld": "None",
+          "ItemHeldLayer2": "BluePotion"
+        },
+        {
+          "SlotPositionX": 52.5,
+          "SlotPositionY": 55,
+          "ItemHeld": "GreenPotion",
+          "ItemHeldLayer2": "BluePotion"
+        },
+        {
+          "SlotPositionX": 87.5,
+          "SlotPositionY": 55,
+          "ItemHeld": "GreenPotion",
+          "ItemHeldLayer2": "None"
+        }
+      ]
+    }
+  ],
+  "LevelType": "Normal"
+}

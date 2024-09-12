@@ -10,11 +10,15 @@ public class GameStateManager : MonoBehaviour
     [Inject] private LevelManager levelManager;
     [Inject] private TimerManager timerManager;
 
+    private DraggableItem[] draggableItems;
+
     private void Start()
     {
         // initalizare stare
         CurrentState = GameState.None;
-        ChangeState(GameState.Start); 
+        ChangeState(GameState.Start);
+
+        draggableItems = FindObjectsOfType<DraggableItem>();
     }
 
     public void ChangeState(GameState newState)
@@ -70,6 +74,8 @@ public class GameStateManager : MonoBehaviour
     private void OnEnterPlayingState()
     {
         Debug.Log("Game is in Playing state.");
+        Time.timeScale = 1;
+        SetDraggableItems(true);
     }
 
     private void OnEnterWinState()
@@ -98,6 +104,8 @@ public class GameStateManager : MonoBehaviour
     private void OnEnterPauseState()
     {
         Debug.Log("Game is Paused.");
+        Time.timeScale = 0;
+        SetDraggableItems(false);
     }
 
     private void OnEnterGameOverState()
@@ -113,6 +121,15 @@ public class GameStateManager : MonoBehaviour
         levelManager.LoadNextLevel();
         ChangeState(GameState.Playing); // pentru prevenire stare win -> win
     }
+
+    private void SetDraggableItems(bool canDrag)
+    {
+        foreach (var item in draggableItems)
+        {
+            item.canDrag = canDrag; // Enable/disable dragging pentru pauza
+        }
+    }
+
 }
 
 public enum GameState

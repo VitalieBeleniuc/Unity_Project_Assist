@@ -10,13 +10,15 @@ public class InteractableSlot : MonoBehaviour, IDropHandler
     [Inject] private PopupManager popupManager;
     [Inject] private GameStateManager stateManager;
 
+    private DraggableItem currentDraggableItem;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (transform.ChildCountActive() == 0) // daca nu sunt alti "copii" activi in slot se executa
         {
             GameObject dropped = eventData.pointerDrag; // obiectul care va fi dropped
-            DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
-            draggableItem.parentAfterDrag = transform; // seteaza noul slot ca parinte
+            currentDraggableItem = dropped.GetComponent<DraggableItem>();
+            currentDraggableItem.parentAfterDrag = transform; // seteaza noul slot ca parinte
 
             StartCoroutine(DelayedCheckForMatches()); // verificare daca sunt 3 match-uri
             StartCoroutine(DelayedCheckForLayers()); // verificare iteme pe layere
@@ -25,20 +27,24 @@ public class InteractableSlot : MonoBehaviour, IDropHandler
     }
 
 
-    // TODO: posibil sa fie necesara o ajustare de delay-uri pentru animatii si alte chestii
     private IEnumerator DelayedCheckForMatches()
     {
-        yield return new WaitForSeconds(0.1f);
-            slotManager.CheckForHorizontalMatches();
+        yield return new WaitForSeconds(0.2f);
+        if (!slotManager.CheckForHorizontalMatches())
+        {
+            Animator animator = currentDraggableItem.GetComponent<Animator>();
+            animator.SetBool("isDropped", true);
+        };
     }
+
     private IEnumerator DelayedCheckForLayers()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.6f);
             slotManager.CheckShelvesAndActivateNextLayerItems();
     }
     private IEnumerator DelayedCheckForCompletion()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.7f);
         if (slotManager.CheckIfAllItemsCleared())
         {
             stateManager.ChangeState(GameState.Win);

@@ -7,11 +7,13 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using static Level;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     private LevelPathsSO _levelPaths;
     private int _currentLevelIndex;
+    public TMP_Text levelText;
 
     [Inject] private SlotManager _slotManager;
     [Inject] private TimerManager _timerManager;
@@ -33,6 +35,7 @@ public class LevelManager : MonoBehaviour
         Level levelData = JsonConvert.DeserializeObject<Level>(jsonContent);
         Debug.Log($"Level: {levelData.NumberOfLevel}, Duration: {levelData.Duration}, Difficulty: {levelData.LevelType}");
 
+        UpdateLevelDisplay(levelData.NumberOfLevel);
         // Setare timer
         _timerManager.StartLevelTimer(levelData.Duration+1);
 
@@ -52,6 +55,11 @@ public class LevelManager : MonoBehaviour
         {
             stateManager.ChangeState(GameState.GameOver);
         }
+    }
+
+    public void UpdateLevelDisplay(float currentLevel)
+    {
+        levelText.text = "Level " + currentLevel;
     }
 
     public void SetCurrentLevelIndex(int index)

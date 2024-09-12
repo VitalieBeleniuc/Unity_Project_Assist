@@ -23,6 +23,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<TimerManager>().FromInstance(timerManager).AsSingle();
         Container.Bind<SlotManager>().FromInstance(slotManager).AsSingle();
         Container.Bind<PopupManager>().FromInstance(popupManager).AsSingle();
+        Container.Bind<DraggableItem>().FromComponentInHierarchy().AsTransient();
     }
 }
 

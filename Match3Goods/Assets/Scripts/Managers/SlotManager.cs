@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using static UnityEditor.Progress;
 
 public class SlotManager : MonoBehaviour
 {
-
     public GameObject shelfPrefab;
     public GameObject slotPrefab; // slot-ul
     public Transform shelvesParent;
@@ -15,9 +15,26 @@ public class SlotManager : MonoBehaviour
     public GameObject bluePotionPrefab;
     public GameObject greenPotionPrefab;
     public GameObject purplePotionPrefab;
+    public GameObject redGemPrefab;
+    public GameObject greenGemPrefab;
+    public GameObject blueGemPrefab;
+    public GameObject crownPrefab;
+    public GameObject goldCoinPrefab;
+    public GameObject bronzeCoinPrefab;
+    public GameObject bronzeRingPrefab;
+    public GameObject breadPrefab;
+    public GameObject cloverPrefab;
+    public GameObject pillsPrefab; 
+    public GameObject hourglassPrefab;
+    public GameObject bookPrefab;
+    public GameObject bombPrefab;
+    public GameObject swordPrefab;
+    public GameObject featherPrefab;
+    public GameObject applePrefab;
 
     private List<GameObject> _loadedSlots = new List<GameObject>();
     private List<GameObject> itemsLayer2 = new List<GameObject>();
+    private List<GameObject> itemsLayer3 = new List<GameObject>();
 
     [Inject] private PopupManager popupManager;
 
@@ -65,6 +82,17 @@ public class SlotManager : MonoBehaviour
                         itemsLayer2.Add(itemInstanceLayer2);
                     }
                 }
+
+                if (slotData.ItemHeldLayer3 != ItemType.None)
+                {
+                    GameObject itemPrefabLayer3 = GetItemPrefab(slotData.ItemHeldLayer3);
+                    if (itemPrefabLayer3 != null)
+                    {
+                        GameObject itemInstanceLayer3 = Instantiate(itemPrefabLayer3, slotInstance.transform);
+                        itemInstanceLayer3.SetActive(false); // Ascunde al treilea item
+                        itemsLayer3.Add(itemInstanceLayer3);
+                    }
+                }
             }
         }
     }
@@ -82,13 +110,45 @@ public class SlotManager : MonoBehaviour
                 return bluePotionPrefab;
             case ItemType.PurplePotion:
                 return purplePotionPrefab;
+            case ItemType.RedGem:
+                return redGemPrefab;
+            case ItemType.GreenGem:
+                return greenGemPrefab;
+            case ItemType.BlueGem:
+                return blueGemPrefab;
+            case ItemType.Crown:
+                return crownPrefab;
+            case ItemType.GoldCoin:
+                return goldCoinPrefab;
+            case ItemType.BronzeCoin:
+                return bronzeCoinPrefab;
+            case ItemType.BronzeRing:
+                return bronzeRingPrefab;
+            case ItemType.Bread:
+                return breadPrefab;
+            case ItemType.Clover:
+                return cloverPrefab;
+            case ItemType.Pills:
+                return pillsPrefab;
+            case ItemType.Hourglass:
+                return hourglassPrefab;
+            case ItemType.Book:
+                return bookPrefab;
+            case ItemType.Bomb:
+                return bombPrefab;
+            case ItemType.Sword:
+                return swordPrefab;
+            case ItemType.Feather:
+                return featherPrefab;
+            case ItemType.Apple:
+                return applePrefab;
             default:
                 return null;
         }
     }
 
 
-    public void CheckForHorizontalMatches()
+    public bool CheckForHorizontalMatches()
     {
         // dictionar pentru stocarea slot-urilor dupa raftul pe care se afla
         Dictionary<GameObject, List<GameObject>> slotsByShelf = new Dictionary<GameObject, List<GameObject>>();
@@ -127,6 +187,8 @@ public class SlotManager : MonoBehaviour
                 slotsByRow[slotPosition].Add(slotInstance);
             }
 
+
+
             // itereaza prin fiecare slot si verifica match 3 dupa pozitia y
             foreach (var row in slotsByRow)
             {
@@ -163,10 +225,13 @@ public class SlotManager : MonoBehaviour
                     {
                         HandleMatch(matchingSlots);
                         matchingSlots.Clear(); // clear pentru prevenire overlap
+                        return true;
                     }
                 }
             }
         }
+
+        return false;
     }
 
 
@@ -174,8 +239,16 @@ public class SlotManager : MonoBehaviour
     {
         foreach (var slot in matchingSlots)
         {
-            Destroy(slot.GetComponentInChildren<DraggableItem>().gameObject);
-            // TODO: posibil de adaugat scor
+            GameObject item = slot.GetComponentInChildren<DraggableItem>().gameObject;
+
+            Animator animator = item.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("isDropped", true);
+                animator.SetTrigger("Match");
+            }
+
+            Destroy(item, 0.3f); // pentru sufiecient timp executare animatie inainte de distrugere
         }
 
         Debug.Log("Match 3 Detected!");

@@ -44,5 +44,21 @@ public enum ItemType
     RedPotion,
     GreenPotion,
     BluePotion, 
-    PurplePotion
+    PurplePotion,
+    RedGem,
+    GreenGem,
+    BlueGem,
+    Crown,
+    GoldCoin,
+    BronzeCoin,
+    BronzeRing,
+    Bread,
+    Clover,
+    Pills,
+    Hourglass,
+    Book,
+    Bomb,
+    Sword,
+    Feather,
+    Apple
 }
