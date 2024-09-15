@@ -33,6 +33,7 @@ public class Level
 
 public enum LevelType
 {
+    Easy,
     Normal,
     Hard,
     SuperHard

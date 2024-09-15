@@ -9,6 +9,7 @@ public class InteractableSlot : MonoBehaviour, IDropHandler
     [Inject] private SlotManager slotManager;
     [Inject] private PopupManager popupManager;
     [Inject] private GameStateManager stateManager;
+    //private bool isCheckingActiveLayers = false;
 
     private DraggableItem currentDraggableItem;
 
@@ -47,10 +48,33 @@ public class InteractableSlot : MonoBehaviour, IDropHandler
         yield return new WaitForSeconds(0.7f);
         if (slotManager.CheckIfAllItemsCleared())
         {
+            slotManager.CheckShelvesAndActivateNextLayerItems();
             stateManager.ChangeState(GameState.Win);
             stateManager.ChangeState(GameState.LevelTransition);
         };
     }
+
+
+    //private void Start()
+    //{
+    //    StartCoroutine(CheckActiveLayersPeriodically(1.0f));
+    //}
+
+    //public IEnumerator CheckActiveLayersPeriodically(float interval)
+    //{
+    //    isCheckingActiveLayers = true;
+
+    //    while (isCheckingActiveLayers)
+    //    {
+    //        slotManager.CheckShelvesAndActivateNextLayerItems();
+    //        yield return new WaitForSeconds(interval);
+    //    }
+    //}
+
+    //public void StopCheckingActiveLayers()
+    //{
+    //    isCheckingActiveLayers = false;
+    //}
 }
 
 

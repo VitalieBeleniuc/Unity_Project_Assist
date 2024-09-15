@@ -76,6 +76,7 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Game is in Playing state.");
         Time.timeScale = 1;
         SetDraggableItems(true);
+        //FindObjectOfType<InteractableSlot>().StartCoroutine(FindObjectOfType<InteractableSlot>().CheckActiveLayersPeriodically(1.0f));
     }
 
     private void OnEnterWinState()
@@ -106,6 +107,7 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("Game is Paused.");
         Time.timeScale = 0;
         SetDraggableItems(false);
+        //FindObjectOfType<InteractableSlot>().StopCheckingActiveLayers();
     }
 
     private void OnEnterGameOverState()
@@ -116,7 +118,7 @@ public class GameStateManager : MonoBehaviour
 
     private IEnumerator TransitionToNextLevel()
     {
-        yield return new WaitForSeconds(3.5f); // TODO: ajustare delay
+        yield return new WaitForSeconds(3.5f);
         popupManager.HideWinPopup();
         levelManager.LoadNextLevel();
         ChangeState(GameState.Playing); // pentru prevenire stare win -> win

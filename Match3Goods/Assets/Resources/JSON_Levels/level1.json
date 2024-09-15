@@ -1,6 +1,6 @@
 {
   "NumberOfLevel": 1,
-  "Duration": 300,
+  "Duration": 60,
   "Shelves": [
     {
       "ShelfPositionX": 0.5,
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "ShelfPositionX": -52.5,
+      "ShelfPositionX": -50.5,
       "ShelfPositionY": 55,
       "Slots": [
         {
@@ -33,7 +33,7 @@
           "ItemHeld": "RedPotion"
         },
         {
-          "SlotPositionX": -52.5,
+          "SlotPositionX": -50.5,
           "SlotPositionY": 55,
           "ItemHeld": "RedPotion"
         },
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "ShelfPositionX": 52.5,
+      "ShelfPositionX": 50.5,
       "ShelfPositionY": 55,
       "Slots": [
         {
@@ -54,7 +54,7 @@
           "ItemHeld": "None"
         },
         {
-          "SlotPositionX": 52.5,
+          "SlotPositionX": 50.5,
           "SlotPositionY": 55,
           "ItemHeld": "GreenPotion"
         },
@@ -66,5 +66,5 @@
       ]
     }
   ],
-  "LevelType": "Normal"
+  "LevelType": "Easy"
 }

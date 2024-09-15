@@ -296,12 +296,13 @@ public class SlotManager : MonoBehaviour
     // verifica daca sunt rafturi goale si activeaza urmatorul layer de iteme
     public void CheckShelvesAndActivateNextLayerItems()
     {
-        // iterare prin fiecare raft
+        // itereaza prin fiecare shelf
         foreach (Transform shelfTransform in shelvesParent)
         {
             bool allSlotsEmpty = true;
+            bool hasLayer2Items = false;
 
-            // iterare prin fiecare slot din raft
+            // itereaza prin fiecare slot in shelf
             foreach (Transform slotTransform in shelfTransform)
             {
                 if (slotTransform.GetComponentInChildren<DraggableItem>() != null)
@@ -313,30 +314,41 @@ public class SlotManager : MonoBehaviour
 
             if (allSlotsEmpty)
             {
-                ActivateNextLayerItemsForShelf(shelfTransform);
+                // daca nu-s iteme in layer 1 activeaza layer 2
+                hasLayer2Items = ActivateNextLayerItemsForShelf(shelfTransform, itemsLayer2);
+
+                // daca nu-s iteme in layer 2 activeaza layer 3
+                if (!hasLayer2Items)
+                {
+                    ActivateNextLayerItemsForShelf(shelfTransform, itemsLayer3);
+                }
             }
         }
     }
 
-    private void ActivateNextLayerItemsForShelf(Transform shelfTransform)
+    private bool ActivateNextLayerItemsForShelf(Transform shelfTransform, List<GameObject> itemLayer)
     {
         List<GameObject> itemsToRemove = new List<GameObject>();
+        bool hasItemsLeft = false;
 
-        // cauta itemele inactive si le activeaza
-        foreach (var itemLayer2 in itemsLayer2)
+        // verifica iteme inactive
+        foreach (var item in itemLayer)
         {
-            // verifica daca itemul apartine raftului corect
-            if (itemLayer2.transform.parent.parent == shelfTransform && !itemLayer2.activeSelf)
+            // verifica daca partine shelfului corect
+            if (item.transform.parent.parent == shelfTransform && !item.activeSelf)
             {
-                itemLayer2.SetActive(true);
-                itemsToRemove.Add(itemLayer2); // removal
+                item.SetActive(true);
+                itemsToRemove.Add(item); // remove dupa activare
+                hasItemsLeft = true;
             }
         }
 
         foreach (var item in itemsToRemove)
         {
-            itemsLayer2.Remove(item);
+            itemLayer.Remove(item);
         }
+
+        return hasItemsLeft; // return true daca au fost activate iteme
     }
 
 

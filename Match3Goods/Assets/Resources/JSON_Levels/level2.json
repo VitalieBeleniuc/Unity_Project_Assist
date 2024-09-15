@@ -1,6 +1,6 @@
 {
   "NumberOfLevel": 2,
-  "Duration": 30,
+  "Duration": 60,
   "Shelves": [
     {
       "ShelfPositionX": 0.5,
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "ShelfPositionX": -52.5,
+      "ShelfPositionX": -50.5,
       "ShelfPositionY": 55,
       "Slots": [
         {
@@ -37,7 +37,7 @@
           "ItemHeldLayer2": "PurplePotion"
         },
         {
-          "SlotPositionX": -52.5,
+          "SlotPositionX": -50.5,
           "SlotPositionY": 55,
           "ItemHeld": "RedPotion",
           "ItemHeldLayer2": "None"
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "ShelfPositionX": 52.5,
+      "ShelfPositionX": 50.5,
       "ShelfPositionY": 55,
       "Slots": [
         {
@@ -61,7 +61,7 @@
           "ItemHeldLayer2": "BluePotion"
         },
         {
-          "SlotPositionX": 52.5,
+          "SlotPositionX": 50.5,
           "SlotPositionY": 55,
           "ItemHeld": "GreenPotion",
           "ItemHeldLayer2": "BluePotion"
@@ -75,5 +75,5 @@
       ]
     }
   ],
-  "LevelType": "Normal"
+  "LevelType": "Easy"
 }
